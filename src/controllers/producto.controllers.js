@@ -17,6 +17,12 @@ productoCTRL.getsProductos = async(req,res)=>{
     }
     res.send(productos);
 
+};
+
+productoCTRL.traerPrecio = async(req,res)=>{
+    const {id} = req.params
+    const producto = (await Producto.find({_id:id},{precio:1,_id:0}))[0];
+    res.send(`${producto.precio}`);
 }
 
 productoCTRL.traerProducto = async(req,res)=>{

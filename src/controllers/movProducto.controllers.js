@@ -2,20 +2,22 @@ const movimientoCTRL = {}
 
 const movProducto = require('../models/movProducto');
 
-movimientoCTRL.id = async(req,res)=>{
-    const tamanio = (await movProducto.find()).length;
-    const id = (await movProducto.find({_id:tamanio},{_id:1}))[0];
-    if (!id) {
-        res.send(`1`);
-    }else{
-        res.send(`${id._id + 1}`);
-    }
-};
+movimientoCTRL.modificarVarios = async(req,res)=>{
+    
+}
 
 movimientoCTRL.cargar = async(req,res)=>{
-    const movimiento = new movProducto(req.body);
-    await movimiento.save();
-    res.send(`Movimiento ${movimiento._id} cargado`);
+    let ultimoID = (await movProducto.find().sort({$natural:-1}).limit(1))[0]._id;
+    console.log(`ID inicial del movimiento es: ${ultimoID}`);
+    console.log(req.body)
+    for await(let movimiento of req.body){
+        ultimoID++;
+        movimiento._id = ultimoID;
+        const movimientoAGuardar = new movProducto(movimiento);
+        await movimientoAGuardar.save();
+        console.log(`Movimiento con el id: ${movimiento._id} --- ${movimiento.producto} Cargado`);
+    }
+    res.send(`Movimientos cargados`);
 }
 
 movimientoCTRL.porId = async(req,res)=>{

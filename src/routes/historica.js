@@ -9,8 +9,8 @@ router.route('/')
     .post(cargarHistorica)
 router.route('/traerPorCliente/:id')
     .get(traerHistoricaPorCliente)
-router.route('PorId/id/:id')
+router.route('/PorId/id/:id')
     .get(traerHistorica)
-    .post(modificarHistorica)
+    .put(modificarHistorica)
 
 module.exports = router;

@@ -1,10 +1,10 @@
 const {Router} = require('express');
 const router = Router();
 
-const {id,cargar,porId,porRubro} = require('../controllers/movProducto.controllers');
+const {id,cargar,modificarVarios,porId,porRubro} = require('../controllers/movProducto.controllers');
 
 router.route('/')
-    .get(id)
+    .put(modificarVarios)
     .post(cargar)
 router.route('/:id')
     .get(porId)
