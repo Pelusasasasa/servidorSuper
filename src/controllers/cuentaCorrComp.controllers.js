@@ -2,19 +2,13 @@ const compensadaCTRL = {};
 
 const CuentaCompensada = require('../models/cuentaCorrComp');
 
-compensadaCTRL.id = async(req,res)=>{
-    const tamanio = (await CuentaCompensada.find()).length;
-    const id = (await CuentaCompensada.find({_id:tamanio},{_id:1}))[0];
-    if (id) {
-        res.send(`${id._id + 1}`);
-    }else{
-        res.send(`1`);
-    }    
-};
-
 compensadaCTRL.crearCompensda = async(req,res)=>{
+    const ultimaCompensada = (await CuentaCompensada.find().sort({$natural:-1}).limit(1))[0];
+    let id = ultimaCompensada ? ultimaCompensada._id : 0;
+    req.body._id = id + 1; 
     const nuevaCompensada = new CuentaCompensada(req.body);
     await nuevaCompensada.save();
+    console.log(`Compensdad ${req.body.nro_venta} creada`)
     res.send(`Compensdad ${req.body._id} creada`);
 }
 

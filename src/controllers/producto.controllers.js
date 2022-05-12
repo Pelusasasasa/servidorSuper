@@ -47,6 +47,7 @@ productoCTRL.traerProductoPorNombre = async(req,res)=>{
 
 productoCTRL.modificarProducto = async(req,res)=>{
     const {id} = req.params;
+    req.body.rubro !== "" ? (req.body.rubro = req.body.rubro.toUpperCase()) : "";
     const producto = await Producto.findOneAndUpdate({_id:id},req.body);
     res.send(`Producto ${producto.descripcion} Modificado`);
 }
@@ -54,7 +55,7 @@ productoCTRL.modificarProducto = async(req,res)=>{
 productoCTRL.cargarProducto = async(req,res)=>{
     req.body.descripcion = req.body.descripcion.toUpperCase();
     req.body.marca !== "" && (req.body.marca = req.body.marca.toUpperCase());
-    req.body.rubro !== "" && (req.body.rubro = req.body.rubro.toUpperCase());
+    req.body.rubro !== "" ? (req.body.rubro = req.body.rubro.toUpperCase()) : "";
     const producto = new Producto(req.body);
     producto.save();
     res.send("Producto Cargado");

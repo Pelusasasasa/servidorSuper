@@ -2,20 +2,14 @@ const historicaCTRL = {};
 
 const Historica = require('../models/cuentaCorrHisto');
 
-historicaCTRL.id = async(req,res)=>{
-    const tamanio = (await Historica.find()).length;
-    const id = (await Historica.find({_id:tamanio},{_id:1}))[0];
-    if (id) {
-        res.send(`${id._id + 1}`);
-    }else{
-        res.send(`1`);
-    }
-}
 
 historicaCTRL.cargarHistorica = async(req,res)=>{
+    const ultimaHistorica = (await Historica.find().sort({$natural:-1}).limit(1))[0];
+    let id = ultimaHistorica ? ultimaHistorica._id : 0;
+    req.body._id = id + 1; 
     const historica = new Historica(req.body);
     await historica.save();
-    console.log("a")
+    console.log(`Historica ${req.body.nro_venta} Guardada`)
     res.send(`Historica ${req.body._id} Guardada`);
 };
 

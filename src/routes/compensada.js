@@ -2,10 +2,9 @@ const {Router} = require('express');
 const router = Router();
 
 
-const {id,crearCompensda,traerPorCliente,traerCompensada,modificarCompensada,eliminarCuenta} = require('../controllers/cuentaCorrComp.controllers');
+const {crearCompensda,traerPorCliente,traerCompensada,modificarCompensada,eliminarCuenta} = require('../controllers/cuentaCorrComp.controllers');
 
 router.route('/')
-    .get(id)
     .post(crearCompensda)
 router.route('/traerCompensadas/:id')
     .get(traerPorCliente)

@@ -2,13 +2,14 @@ const {Router} = require('express');
 const router = Router();
 
 
-const {id,getVenta,cargarVenta,eliminarVenta,VentasDia,ventasMes,ventaAnio} = require('../controllers/venta.controllers');
+const {id,getVenta,modificarVenta,cargarVenta,eliminarVenta,VentasDia,ventasMes,ventaAnio} = require('../controllers/venta.controllers');
 
 router.route('/')
     .post(cargarVenta)
     .get(id)
 router.route('/id/:id')
     .get(getVenta)
+    .put(modificarVenta)
     .delete(eliminarVenta)
 router.route('/dia/:fecha')
     .get(VentasDia)

@@ -1,11 +1,10 @@
 const {Router} = require('express');
 const router = Router();
 
-const {id,cargarHistorica,traerHistoricaPorCliente,traerHistorica,modificarHistorica} = require('../controllers/cuentaCorrHistorica.controllers');
+const {cargarHistorica,traerHistoricaPorCliente,traerHistorica,modificarHistorica} = require('../controllers/cuentaCorrHistorica.controllers');
 
 
 router.route('/')
-    .get(id)
     .post(cargarHistorica)
 router.route('/traerPorCliente/:id')
     .get(traerHistoricaPorCliente)
