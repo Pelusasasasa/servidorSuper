@@ -19,6 +19,10 @@ const Cliente = new Schema({
     saldo:{
         type: Number,
         default: 0
+    },
+    condicionFacturacion:{
+        type:Number,
+        default:1
     }
 });
 

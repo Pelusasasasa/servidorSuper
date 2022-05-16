@@ -17,3 +17,4 @@ router.route('/:descripcion/:condicion')
 router.route('/buscar/porNombre/:nombre')
     .get(traerProductoPorNombre)
 module.exports = router;
+    
