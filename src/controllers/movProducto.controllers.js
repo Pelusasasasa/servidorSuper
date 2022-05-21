@@ -3,7 +3,12 @@ const movimientoCTRL = {}
 const movProducto = require('../models/movProducto');
 
 movimientoCTRL.modificarVarios = async(req,res)=>{
-    
+    const arreglo = req.body;
+    for await(let movimiento of arreglo){
+        await movProducto.findByIdAndUpdate({_id:movimiento._id},movimiento);
+        console.log(`movimiento con el ID: ${movimiento._id} Modificado`);
+    }
+    res.send("moviemientos modificados");
 }
 
 movimientoCTRL.cargar = async(req,res)=>{
