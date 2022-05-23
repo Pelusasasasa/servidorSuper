@@ -12,9 +12,9 @@ movimientoCTRL.modificarVarios = async(req,res)=>{
 }
 
 movimientoCTRL.cargar = async(req,res)=>{
-    let ultimoID = (await movProducto.find().sort({$natural:-1}).limit(1))[0]._id;
+    let ultimoID = (await movProducto.find().sort({$natural:-1}).limit(1))[0];
+    ultimoID = ultimoID ? ultimoID._id : 1;
     console.log(`ID inicial del movimiento es: ${ultimoID}`);
-    console.log(req.body)
     for await(let movimiento of req.body){
         ultimoID++;
         movimiento._id = ultimoID;
