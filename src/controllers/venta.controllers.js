@@ -3,8 +3,7 @@ const ventaCTRL = {};
 const Venta = require('../models/Venta');
 
 ventaCTRL.id = async(req,res)=>{
-    const ultimaVenta = (await Venta.find()).length;
-    const id = (await Venta.find({_id:ultimaVenta},{_id:1}))[0]
+    const id = (await Venta.find().sort({$natural:-1}).limit(1))[0];
     if (!id) {
         res.send(`1`)
     }else{
