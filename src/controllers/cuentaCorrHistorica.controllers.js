@@ -21,7 +21,7 @@ historicaCTRL.traerHistoricaPorCliente = async(req,res)=>{
 
 historicaCTRL.traerHistorica = async(req,res)=>{
     const {id} = req.params;
-    const historica = await Historica.find({_id:id});
+    const historica = await Historica.find({nro_venta:id});
     res.send(historica[0]);
 }
 
