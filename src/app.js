@@ -18,5 +18,6 @@ app.use('/morel/movimiento',require('./routes/movProducto'));
 app.use('/morel/compensada',require('./routes/compensada'));
 app.use('/morel/historica',require('./routes/historica'));
 app.use('/morel/recibo',require('./routes/recibo'));
+app.use('/morel/numero',require('./routes/numero'));
 
 module.exports = app;
