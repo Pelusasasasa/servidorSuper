@@ -1,11 +1,11 @@
 const {Router} = require('express');
 const router = Router();
 
-const {tamanio,traerProducto,traerPrecio,cargarProducto,eliminarProducto,getsProductos,modificarProducto,traerProductoPorNombre} = require('../controllers/producto.controllers');
+const {traerProducto,descontarStock,traerPrecio,cargarProducto,eliminarProducto,getsProductos,modificarProducto,traerProductoPorNombre} = require('../controllers/producto.controllers');
 
 router.route('/')
-    .get(tamanio)
     .post(cargarProducto)
+    .put(descontarStock)
 router.route('/traerPrecio/:id')
     .get(traerPrecio)
 router.route('/:id')

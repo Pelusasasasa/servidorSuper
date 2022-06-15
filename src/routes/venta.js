@@ -7,7 +7,7 @@ const {id,getVenta,modificarVenta,cargarVenta,eliminarVenta,VentasDia,ventasMes,
 router.route('/')
     .post(cargarVenta)
     .get(id)
-router.route('/id/:id')
+router.route('/id/:id/:tipo')
     .get(getVenta)
     .put(modificarVenta)
     .delete(eliminarVenta)

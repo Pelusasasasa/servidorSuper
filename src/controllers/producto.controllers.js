@@ -2,8 +2,13 @@ const productoCTRL = {};
 
 const Producto = require('../models/producto');
 
-productoCTRL.tamanio = async(req,res)=>{
-    res.send("1")
+productoCTRL.descontarStock = async(req,res)=>{
+    const array = req.body;
+    for await(let producto of array){
+        await Producto.findOneAndUpdate({_id:producto._id},producto);
+        console.log(`Producto ${producto.descripcion} modificado el stock a: ${producto.stock}`)
+    };
+    res.send("Stock Modificado")
 }
 
 productoCTRL.getsProductos = async(req,res)=>{
