@@ -11,6 +11,7 @@ productoCTRL.descontarStock = async(req,res)=>{
     res.send("Stock Modificado")
 }
 
+//traemos los productos
 productoCTRL.getsProductos = async(req,res)=>{
     const {descripcion,condicion} = req.params;
     let productos;
@@ -27,7 +28,6 @@ productoCTRL.getsProductos = async(req,res)=>{
         }
     }
     res.send(productos);
-
 };
 
 productoCTRL.traerPrecio = async(req,res)=>{
@@ -58,9 +58,23 @@ productoCTRL.traerProductoPorNombre = async(req,res)=>{
 
 productoCTRL.modificarProducto = async(req,res)=>{
     const {id} = req.params;
+    let producto;
+    let mensaje;
+    let estado;
     req.body.rubro !== "" ? (req.body.rubro = req.body.rubro.toUpperCase()) : "";
-    const producto = await Producto.findOneAndUpdate({_id:id},req.body);
-    res.send(`Producto ${producto.descripcion} Modificado`);
+    try {
+        producto = await Producto.findOneAndUpdate({_id:id},req.body);
+        mensaje = `Producto ${producto.descripcion} Modificado`;
+        estado = true
+    } catch (error) {
+        mensaje = `Producto ${producto.descripcion} No se modifico`
+        estado = false
+    }
+    res.send(JSON.stringify({
+        estado,
+        mensaje
+    }));    
+    
 }
 
 productoCTRL.cargarProducto = async(req,res)=>{
@@ -77,7 +91,7 @@ productoCTRL.cargarProducto = async(req,res)=>{
         estado = true;
     } catch (error) {
         estado = false;
-        console.log(producto)
+        console.log(error)
         if(producto.descripcion === ""){
             mensaje = `Producto no cargado, Falta la descripcion`
         }else if(!producto.stock){
@@ -88,6 +102,7 @@ productoCTRL.cargarProducto = async(req,res)=>{
             mensaje = `Producto ${producto.descripcion} No cargado`;
         }
     }
+    console.log(mensaje)
     res.send(JSON.stringify({
         mensaje,
         estado
