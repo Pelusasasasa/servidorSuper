@@ -29,12 +29,29 @@ clienteCTRL.getClienteId = async(req,res)=>{
 }
 
 clienteCTRL.cargarCliente = async(req,res)=>{
+    let cliente;
+    let mensaje;
+    let estado;
     req.body.nombre = req.body.nombre.toUpperCase();
     req.body.localidad !== "" && (req.body.localidad = req.body.localidad.toUpperCase());
     req.body.localidad !== "" && (req.body.direccion = req.body.direccion.toUpperCase());
-    const cliente = new Clientes(req.body);
-    await  cliente.save();
-    res.send(`Cliente ${cliente.nombre} Cargado`);
+    try {
+        cliente = new Clientes(req.body);
+        await  cliente.save();
+        mensaje = (`Cliente ${cliente.nombre} Cargado`);
+        estado = true;
+    } catch (error) {
+        estado = false;
+        if (cliente.nombre === "") {
+            mensaje = (`Cliente No Cargado, Falta el nombre`)
+        }else{
+            mensaje = (`Cliente ${cliente.nombre} No Fue Cargado`)
+        }
+    }
+    res.send(JSON.stringify({
+        mensaje,
+        estado
+    }))
 }
 
 clienteCTRL.modificarCliente = async(req,res)=>{

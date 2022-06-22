@@ -64,12 +64,34 @@ productoCTRL.modificarProducto = async(req,res)=>{
 }
 
 productoCTRL.cargarProducto = async(req,res)=>{
+    let producto;
+    let mensaje;
+    let estado;
     req.body.descripcion = req.body.descripcion.toUpperCase();
     req.body.marca !== "" && (req.body.marca = req.body.marca.toUpperCase());
     req.body.rubro !== "" ? (req.body.rubro = req.body.rubro.toUpperCase()) : "";
-    const producto = new Producto(req.body);
-    producto.save();
-    res.send("Producto Cargado");
+    try {
+        producto = new Producto(req.body);
+        await producto.save();
+        mensaje = `Producto ${producto.descripcion} cargado`;
+        estado = true;
+    } catch (error) {
+        estado = false;
+        console.log(producto)
+        if(producto.descripcion === ""){
+            mensaje = `Producto no cargado, Falta la descripcion`
+        }else if(!producto.stock){
+            mensaje = `Producto no cargado, Falta el stock`
+        }else if(!producto.costo){
+            mensaje = `Producto no cargado, Falta el costo`
+        }else{
+            mensaje = `Producto ${producto.descripcion} No cargado`;
+        }
+    }
+    res.send(JSON.stringify({
+        mensaje,
+        estado
+    }));
 }
 
 productoCTRL.eliminarProducto = async(req,res)=>{

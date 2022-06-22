@@ -26,7 +26,7 @@ const Producto = new Schema({
     },
     impuesto:{
         type:Number,
-        required: true
+        default: 0
     },
     ganancia:{
         type: Number,

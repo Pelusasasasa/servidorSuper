@@ -2,7 +2,10 @@ const {Schema,model} = require('mongoose');
 
 const Cliente = new Schema({
     _id:Number,
-    nombre:String,
+    nombre:{
+        type:String,
+        required:true
+    },
     telefono:{
         type:String,
         default:""
