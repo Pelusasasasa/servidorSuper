@@ -37,6 +37,10 @@ const Venta = new Schema({
     tipo_venta:{
         type: String,
         default: "CC"  
+    },
+    descripcion:{
+        type:String,
+        default:""
     }
 });
 

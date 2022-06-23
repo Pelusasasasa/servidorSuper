@@ -23,6 +23,7 @@ numeroCTRL.modificarNumero = async(req,res)=>{
     const numeros = (await Numero.find())[0];
     numeros[numero] = req.body[numero];
     await Numero.findOneAndUpdate({_id:numeros._id},numeros);
+    console.log("Numero Modificado")
     res.send(`Numero del tipo ${numero} Modificado`);
 }
 

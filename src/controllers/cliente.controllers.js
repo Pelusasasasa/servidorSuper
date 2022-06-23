@@ -37,6 +37,8 @@ clienteCTRL.cargarCliente = async(req,res)=>{
     req.body.localidad !== "" && (req.body.direccion = req.body.direccion.toUpperCase());
     try {
         cliente = new Clientes(req.body);
+        console.log(cliente)
+        console.log(req.body)
         await  cliente.save();
         mensaje = (`Cliente ${cliente.nombre} Cargado`);
         estado = true;
@@ -64,6 +66,10 @@ clienteCTRL.eliminarCliente = async(req,res) =>{
     const {id} = req.params;
     const cliente = await Clientes.findOneAndDelete({_id:id});
     res.send(`Cliente ${cliente.nombre} Eliminado`);
+}
+clienteCTRL.traerClienteConSaldo = async(req,res)=>{
+    const clientes = await Clientes.find({saldo:{$not:{$eq:0}}})
+    res.send(clientes)
 }
 
 
