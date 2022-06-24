@@ -41,6 +41,10 @@ const Venta = new Schema({
     descripcion:{
         type:String,
         default:""
+    },
+    tipo_comp:{
+        type:String,
+        default:""
     }
 });
 

@@ -2,18 +2,11 @@ const ventaCTRL = {};
 
 const Venta = require('../models/Venta');
 
-ventaCTRL.id = async(req,res)=>{
-    const id = (await Venta.find().sort({$natural:-1}).limit(1))[0];
-    if (!id) {
-        res.send(`1`)
-    }else{
-        res.send(`${id._id + 1}`)
-    }
-}
-
 ventaCTRL.getVenta = async(req,res)=>{
     const {id,tipo} = req.params;
-    const venta = await Venta.find({_id:id,tipo_venta:tipo});
+    console.log(id,tipo)
+    const venta = await Venta.find({numero:id,tipo_venta:tipo});
+    console.log(venta)
     res.send(venta[0]);
 }
 
@@ -23,8 +16,12 @@ ventaCTRL.modificarVenta = async(req,res)=>{
     res.send(`Venta ${venta._id} actualizada`);
 }
 ventaCTRL.cargarVenta = async(req,res)=>{
-    const id = (await Venta.find().sort({$natural:-1}))[0]._id;
-    req.body._id = id + 1;
+    let id = (await Venta.find().sort({$natural:-1}))[0];
+    if (!id) {
+        req.body._id = 1;
+    }else{
+        req.body._id = id._id + 1;
+    }
     const venta = new Venta(req.body);
     await venta.save();
     res.send("Venta Guardada");
