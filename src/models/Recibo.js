@@ -28,6 +28,10 @@ const Recibo = new Schema({
     descuento:{
         type:Number,
         default:0
+    },
+    tipo_comp:{
+        type:String,
+        default:""
     }
 });
 

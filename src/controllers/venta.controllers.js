@@ -46,16 +46,14 @@ ventaCTRL.ventasMes = async(req,res)=>{
     let mes = parseFloat(fecha);
     mes = mes>12 ? 1 : mes;
     let hoy = new Date();
-    let diaHoy = hoy.getDate();
-    diaHoy = diaHoy<10 ? `0${diaHoy}` : diaHoy;
     let fechaConMes = new Date(`${hoy.getFullYear()}-${mes}-1`);
-    let fechaConMesSig = new Date(`${hoy.getFullYear()}-${mes + 1}-1`);
+    let fechaConMesSig = new Date(`${hoy.getFullYear()}-${mes===12 ? 1 : mes + 1}-1`);
     const ventas = await Venta.find({
     $and:[
         {fecha:{$gte:fechaConMes}},
         {fecha:{$lte:fechaConMesSig}}
     ]
-});
+}); 
     res.send(ventas);
 };
 
