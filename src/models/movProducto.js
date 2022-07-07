@@ -13,6 +13,10 @@ const movProducto = new Schema({
         type:String,
         default:""
     },
+    marca:{
+        type:String,
+        default:""
+    },
     codProd:{
         type:String,
         default:""
