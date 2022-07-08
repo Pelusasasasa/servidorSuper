@@ -21,8 +21,16 @@ productoCTRL.getsProductos = async(req,res)=>{
         let re;
         try {
             re = new RegExp(`^${descripcion}`);
+            clg
+            if (descripcion[0] === "*") {
+                
+            re = new RegExp(`${descripcion.substr(1)}`);
+            }
+            console.log("C")
             productos = await Producto.find({[condicion]:{$regex:re,$options:"i"}}).limit(50);
+            console.log("A")
         } catch (error) {
+            
             re = descripcion;
             productos = await Producto.find().limit(50);
         }
