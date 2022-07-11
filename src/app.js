@@ -19,5 +19,6 @@ app.use('/morel/compensada',require('./routes/compensada'));
 app.use('/morel/historica',require('./routes/historica'));
 app.use('/morel/recibo',require('./routes/recibo'));
 app.use('/morel/numero',require('./routes/numero'));
+app.use('/morel/rubro',require('./routes/rubro'));
 
 module.exports = app;
