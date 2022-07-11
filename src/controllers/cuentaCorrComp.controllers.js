@@ -26,9 +26,8 @@ compensadaCTRL.traerCompensada = async(req,res)=>{
 
 compensadaCTRL.modificarCompensada = async(req,res)=>{
     const {id} = req.params;
-    console.log(id)
-    const compensada = await CuentaCompensada.findOneAndUpdate({_id:id},req.body);
-    console.log(compensada)
+    const compensada = await CuentaCompensada.findOneAndUpdate({nro_venta:id},req.body);
+    console.log(`Cuenta ${id} Modificada`)
     res.send(`Cuenta ${id} Modificada`)
 }
 

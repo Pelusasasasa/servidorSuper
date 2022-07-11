@@ -21,7 +21,6 @@ productoCTRL.getsProductos = async(req,res)=>{
         let re;
         try {
             re = new RegExp(`^${descripcion}`);
-            clg
             if (descripcion[0] === "*") {
                 
             re = new RegExp(`${descripcion.substr(1)}`);
