@@ -1,6 +1,6 @@
-const {model,Schema} = require('mongoose');
+const mongoose = require('mongoose');
 
-const movProducto = new Schema({
+const movProducto = new mongoose.Schema({
     _id:{
         type:Number,
         required:true
@@ -8,6 +8,9 @@ const movProducto = new Schema({
     fecha:{
         type:Date,
         default: Date.now
+    },
+    tipo_venta:{
+        type:"String"
     },
     cliente:{
         type:String,
@@ -43,4 +46,4 @@ const movProducto = new Schema({
     }  
 });
 
-module.exports = model('MovProducto',movProducto);
+module.exports = mongoose.model('MovProducto',movProducto);

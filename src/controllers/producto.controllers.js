@@ -17,7 +17,7 @@ productoCTRL.getsProductos = async(req,res)=>{
     let productos;
     if (descripcion === "textoVacio") {
          productos = await Producto.find({}).limit(50);
-    }else{
+    }else{  
         let re;
         try {
             re = new RegExp(`^${descripcion}`);
@@ -26,9 +26,7 @@ productoCTRL.getsProductos = async(req,res)=>{
                 
             re = new RegExp(`${descripcion.substr(1)}`);
             }
-            console.log("C")
             productos = await Producto.find({[condicion]:{$regex:re,$options:"i"}}).limit(50);
-            console.log("A")
         } catch (error) {
             
             re = descripcion;

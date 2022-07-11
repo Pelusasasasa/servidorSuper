@@ -1,10 +1,10 @@
-const {Schema, model} = require('mongoose');
+const mongoose = require('mongoose');
 
-const Numero = new Schema({
+const Numero = new mongoose.Schema({
     "Cuenta Corriente":Number,
     "Contado":Number,
     "Recibo":Number
 });
 
 
-module.exports = model('Numero',Numero)
+module.exports = mongoose.model('Numero',Numero)

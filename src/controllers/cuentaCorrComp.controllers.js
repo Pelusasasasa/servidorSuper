@@ -14,7 +14,7 @@ compensadaCTRL.crearCompensda = async(req,res)=>{
 
 compensadaCTRL.traerPorCliente = async(req,res)=>{
     const {id} = req.params;
-    const compensadas = await CuentaCompensada.find({$and:[{idCliente:id},{$not:{saldo:{eq:0}}}]});
+    const compensadas = await CuentaCompensada.find({$and:[{idCliente:id},{saldo:{$not:{$eq:0}}}]});
     res.send(compensadas);
 };
 
@@ -26,7 +26,9 @@ compensadaCTRL.traerCompensada = async(req,res)=>{
 
 compensadaCTRL.modificarCompensada = async(req,res)=>{
     const {id} = req.params;
+    console.log(id)
     const compensada = await CuentaCompensada.findOneAndUpdate({_id:id},req.body);
+    console.log(compensada)
     res.send(`Cuenta ${id} Modificada`)
 }
 

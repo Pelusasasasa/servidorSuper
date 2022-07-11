@@ -27,6 +27,7 @@ historicaCTRL.traerHistorica = async(req,res)=>{
 
 historicaCTRL.modificarHistorica = async(req,res)=>{
     const {id} = req.params;
+    delete req.body._id;
     const historica = await Historica.findOneAndUpdate({_id:id},req.body);
     res.send(`historica ${id} modificada`);
 };

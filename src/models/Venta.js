@@ -1,6 +1,6 @@
-const {Schema,model} = require('mongoose');
+const mongoose = require('mongoose');
 
-const Venta = new Schema({
+const Venta = new mongoose.Schema({
     _id:{
         type:Number,
         required:true
@@ -48,4 +48,4 @@ const Venta = new Schema({
     }
 });
 
-module.exports = model('Venta',Venta);
+module.exports = mongoose.model('Venta',Venta);

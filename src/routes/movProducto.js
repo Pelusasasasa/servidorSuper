@@ -6,7 +6,7 @@ const {id,cargar,modificarVarios,porId,porRubro} = require('../controllers/movPr
 router.route('/')
     .put(modificarVarios)
     .post(cargar)
-router.route('/:id')
+router.route('/:id/:tipoVenta')
     .get(porId)
 router.route('/rubro/:rubro/:desde/:hasta')
     .get(porRubro)

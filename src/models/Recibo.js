@@ -1,6 +1,6 @@
-const {model,Schema} = require('mongoose');
+const mongoose = require('mongoose');
 
-const Recibo = new Schema({
+const Recibo = new mongoose.Schema({
     _id: {
         type:Number,
         required:true
@@ -35,4 +35,4 @@ const Recibo = new Schema({
     }
 });
 
-module.exports = model("Recibo",Recibo);
+module.exports = mongoose.model("Recibo",Recibo);

@@ -37,8 +37,6 @@ clienteCTRL.cargarCliente = async(req,res)=>{
     req.body.localidad !== "" && (req.body.direccion = req.body.direccion.toUpperCase());
     try {
         cliente = new Clientes(req.body);
-        console.log(cliente)
-        console.log(req.body)
         await  cliente.save();
         mensaje = (`Cliente ${cliente.nombre} Cargado`);
         estado = true;

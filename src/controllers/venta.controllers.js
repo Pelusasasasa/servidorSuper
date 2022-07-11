@@ -4,16 +4,15 @@ const Venta = require('../models/Venta');
 
 ventaCTRL.getVenta = async(req,res)=>{
     const {id,tipo} = req.params;
-    console.log(id,tipo)
     const venta = await Venta.find({numero:id,tipo_venta:tipo});
-    console.log(venta)
     res.send(venta[0]);
 }
 
 ventaCTRL.modificarVenta = async(req,res)=>{
-    const {id} = req.params;
-    const venta = await Venta.findOneAndUpdate({_id:id},req.body);
-    res.send(`Venta ${venta._id} actualizada`);
+    const {id,tipo} = req.params;
+    delete req.body._id;
+    const venta = await Venta.findByIdAndUpdate({_id:id,tipo_venta:tipo},req.body);
+    res.send(`Venta ${id} actualizada`);
 }
 ventaCTRL.cargarVenta = async(req,res)=>{
     let id = (await Venta.find().sort({$natural:-1}))[0];

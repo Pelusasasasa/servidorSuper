@@ -1,6 +1,6 @@
-const {Schema,model} = require('mongoose');
+const mongoose = require('mongoose');
 
-const Cliente = new Schema({
+const Cliente = new mongoose.Schema({
     _id:Number,
     nombre:{
         type:String,
@@ -29,4 +29,4 @@ const Cliente = new Schema({
     }
 });
 
-module.exports = model('Cliente',Cliente);
+module.exports = mongoose.model('Cliente',Cliente);

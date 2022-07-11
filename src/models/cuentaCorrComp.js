@@ -1,6 +1,6 @@
-const { model,Schema} = require('mongoose');
+const mongoose = require('mongoose');
 
-const CuentaCompensada = new Schema({
+const CuentaCompensada = new mongoose.Schema({
     _id:{
         type:Number,
         required:true
@@ -32,7 +32,7 @@ const CuentaCompensada = new Schema({
     saldo:{
         type: Number,
         required: true
-    }
+    },
 });
 
-module.exports = model("CuentaCompensada",CuentaCompensada);
+module.exports = mongoose.model("CuentaCompensada",CuentaCompensada);

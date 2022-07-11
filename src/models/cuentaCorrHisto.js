@@ -1,6 +1,6 @@
-const {model,Schema} = require('mongoose');
+const mongoose = require('mongoose');
 
-const Historica = new Schema({
+const Historica = new mongoose.Schema({
     _id:{
         type: Number,
         required:true
@@ -35,4 +35,4 @@ const Historica = new Schema({
     }
 });
 
-module.exports = model("Historica",Historica);
+module.exports = mongoose.model("Historica",Historica);
