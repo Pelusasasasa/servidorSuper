@@ -70,10 +70,5 @@ ventaCTRL.ventaAnio = async(req,res)=>{
     res.send(ventas);
 }
 
-ventaCTRL.eliminarVenta = async(req,res)=>{
-    const {id} = req.params;
-    const venta = await Venta.findOneAndDelete({_id:id});
-    res.send(`Venta ${venta._id} Eliminada`)
-}
 
 module.exports = ventaCTRL;
