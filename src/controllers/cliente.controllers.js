@@ -15,10 +15,10 @@ clienteCTRL.getsClientes = async(req,res)=>{
 }
 
 clienteCTRL.id = async(req,res)=>{
-    const ultimoCliente = (await Clientes.find()).length;
-    let id = (await Clientes.find({_id:ultimoCliente},{_id:1}))[0];
+    const ultimoCliente = (await Clientes.find().sort({$natural:-1}).limit(1))[0]
+    let id = ultimoCliente._id
     id = id === undefined ? {_id:0} : id;
-    res.send(`${id._id + 1}`);
+    res.send(`${id + 1}`);
 
 }
 
