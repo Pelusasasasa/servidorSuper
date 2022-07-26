@@ -25,8 +25,7 @@ const movProducto = new mongoose.Schema({
         default:""
     },
     producto:{
-        type:String,
-        required:true,
+        type:String
     },
     rubro:{
         type:String,

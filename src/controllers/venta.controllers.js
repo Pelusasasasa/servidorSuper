@@ -15,13 +15,8 @@ ventaCTRL.modificarVenta = async(req,res)=>{
     res.send(`Venta ${id} actualizada`);
 }
 ventaCTRL.cargarVenta = async(req,res)=>{
-    let arreglo = (await Venta.find({},{_id:1}));
-    let id = 0;
-    arreglo.forEach(e => {
-       e._doc._id > id;
-       id = e._doc._id;
-    });
-    console.log(id)
+    let arreglo = (await Venta.find().sort({$natural:-1}).limit(1))[0];
+    const id = arreglo._doc._id;
     if (!id) {
         req.body._id = 1;
     }else{
