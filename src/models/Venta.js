@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const Venta = new mongoose.Schema({
-    _id:{
-        type:Number,
-        required:true
-    },
     fecha:{
         type:Date,
         default: Date.now

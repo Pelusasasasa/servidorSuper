@@ -4,8 +4,6 @@ const Recibo = require('../models/Recibo');
 
 
 reciboCTRL.cargarRecibo = async(req,res)=>{
-    let id = (await Recibo.find().sort({$natural:-1}).limit(1))[0];
-    req.body._id = id ? id._id + 1 : 1;
     const nuevoRecibo = new Recibo(req.body);
     await nuevoRecibo.save();
     res.send(`Recibo ${req.body._id} cargado`)

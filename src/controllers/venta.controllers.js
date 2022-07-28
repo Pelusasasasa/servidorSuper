@@ -11,17 +11,10 @@ ventaCTRL.getVenta = async(req,res)=>{
 ventaCTRL.modificarVenta = async(req,res)=>{
     const {id,tipo} = req.params;
     delete req.body._id;
-    const venta = await Venta.findByIdAndUpdate({_id:id,tipo_venta:tipo},req.body);
+    const venta = await Venta.findOneAndUpdate({numero:id,tipo_venta:tipo},req.body);
     res.send(`Venta ${id} actualizada`);
 }
 ventaCTRL.cargarVenta = async(req,res)=>{
-    let arreglo = (await Venta.find().sort({$natural:-1}).limit(1))[0];
-    const id = arreglo._doc._id;
-    if (!id) {
-        req.body._id = 1;
-    }else{
-        req.body._id = id + 1;
-    }
     const venta = new Venta(req.body);
     await venta.save();
     res.send("Venta Guardada");
