@@ -4,8 +4,12 @@ const Historica = require('../models/cuentaCorrHisto');
 
 
 historicaCTRL.cargarHistorica = async(req,res)=>{
-    const ultimaHistorica = (await Historica.find().sort({$natural:-1}).limit(1))[0];
-    let id = ultimaHistorica ? ultimaHistorica._id : 0;
+    const ultimaHistorica = (await Historica.find({},{_id:1}));
+    let arreglo  = ultimaHistorica.map((e)=>{
+        return e._id
+    });
+    let id = Math.max(...arreglo);
+    id = id ? id: 0;
     req.body._id = id + 1; 
     const historica = new Historica(req.body);
     await historica.save();

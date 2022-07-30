@@ -12,12 +12,16 @@ movimientoCTRL.modificarVarios = async(req,res)=>{
 }
 
 movimientoCTRL.cargar = async(req,res)=>{
-    let ultimoID = (await movProducto.find().sort({$natural:-1}).limit(1))[0];
-    ultimoID = ultimoID ? ultimoID._id : 1;
-    console.log(`ID inicial del movimiento es: ${ultimoID}`);
+    let ultimoID = (await movProducto.find({},{_id:1}));
+    let arreglo = ultimoID.map((e)=>{
+        return e._id;
+    });
+    let id = Math.max(...arreglo)
+    id = id ? id : 1;
+    console.log(`ID inicial del movimiento es: ${id}`);
     for await(let movimiento of req.body){
-        ultimoID++;
-        movimiento._id = ultimoID;
+        id++;
+        movimiento._id = id;
         const movimientoAGuardar = new movProducto(movimiento);
         await movimientoAGuardar.save();
         console.log(`Movimiento con el id: ${movimiento._id} --- ${movimiento.producto} Cargado`);

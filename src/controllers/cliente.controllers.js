@@ -15,8 +15,11 @@ clienteCTRL.getsClientes = async(req,res)=>{
 }
 
 clienteCTRL.id = async(req,res)=>{
-    const ultimoCliente = (await Clientes.find().sort({$natural:-1}).limit(1))[0];
-    let id = ultimoCliente._id
+    const ultimoCliente = (await Clientes.find({},{_id:1}));
+    let arreglo = ultimoCliente.map((e)=>{
+        return e._id
+    });
+    let id = Math.max(...arreglo)
     id = id === undefined ? {_id:0} : id;
     res.send(`${id + 1}`);
 

@@ -6,7 +6,7 @@ const Recibo = require('../models/Recibo');
 reciboCTRL.cargarRecibo = async(req,res)=>{
     const nuevoRecibo = new Recibo(req.body);
     await nuevoRecibo.save();
-    res.send(`Recibo ${req.body._id} cargado`)
+    res.send(`Recibo ${req.body.numero} cargado`)
 }
 
 reciboCTRL.recibosDia = async(req,res)=>{
@@ -19,6 +19,7 @@ reciboCTRL.recibosDia = async(req,res)=>{
             {fecha:{$lte:findia}}
         ]
     })
+    console.log(recibos)
     res.send(recibos);
 }
 

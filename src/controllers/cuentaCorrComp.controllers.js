@@ -3,8 +3,14 @@ const compensadaCTRL = {};
 const CuentaCompensada = require('../models/cuentaCorrComp');
 
 compensadaCTRL.crearCompensda = async(req,res)=>{
-    const ultimaCompensada = (await CuentaCompensada.find().sort({$natural:-1}).limit(1))[0];
-    let id = ultimaCompensada ? ultimaCompensada._id : 0;
+    const ultimaCompensada = (await CuentaCompensada.find({},{_id:1}));
+    let arreglo = ultimaCompensada.map((e)=>{
+        return e._id
+    });
+
+    let id = Math.max(...arreglo)
+    id = id === undefined ? 0 : id;
+    console.log(id)
     req.body._id = id + 1; 
     const nuevaCompensada = new CuentaCompensada(req.body);
     await nuevaCompensada.save();
